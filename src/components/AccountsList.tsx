@@ -1,166 +1,137 @@
 
-import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
-import { Search, Download, Eye, CheckCircle, XCircle, Copy } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
+import { Button } from "@/components/ui/button";
+import { Database, Download, Eye, Trash2, RefreshCw } from "lucide-react";
 
 export const AccountsList = () => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const { toast } = useToast();
-
   const accounts = [
-    {
-      id: 1,
-      email: "ahmed.ali@tempmail.com",
-      name: "أحمد علي محمد",
+    { 
+      id: 1, 
+      email: "ahmed.ali@tempmail.com", 
+      password: "SecurePass123!", 
       country: "الجزائر", 
-      passport: "DZ123456789",
-      status: "active",
-      createdAt: "2024-01-15 14:30",
-      proxy: "192.168.1.1:8080",
+      status: "active", 
+      created: "2024-01-15 14:30",
+      lastLogin: "2024-01-20 09:15"
     },
-    {
-      id: 2,
-      email: "fatima.salem@tempmail.com",
-      name: "فاطمة سالم",
-      country: "المغرب",
-      passport: "MA987654321", 
-      status: "pending",
-      createdAt: "2024-01-15 13:15",
-      proxy: "192.168.1.2:8080",
+    { 
+      id: 2, 
+      email: "fatima.salem@1secmail.org", 
+      password: "MyPass456#", 
+      country: "المغرب", 
+      status: "active", 
+      created: "2024-01-15 13:25",
+      lastLogin: "2024-01-19 16:20"
     },
-    {
-      id: 3,
-      email: "mohamed.ahmed@tempmail.com",
-      name: "محمد الأحمد",
-      country: "تونس",
-      passport: "TN456789123",
-      status: "failed",
-      createdAt: "2024-01-15 12:45",
-      proxy: "192.168.1.3:8080",
+    { 
+      id: 3, 
+      email: "mohamed.hassan@guerrillamail.com", 
+      password: "StrongPass789$", 
+      country: "تونس", 
+      status: "suspended", 
+      created: "2024-01-15 12:20",
+      lastLogin: "2024-01-18 11:30"
+    },
+    { 
+      id: 4, 
+      email: "zeinab.ahmed@tempmail.io", 
+      password: "ComplexPass101@", 
+      country: "مصر", 
+      status: "inactive", 
+      created: "2024-01-15 11:15",
+      lastLogin: "2024-01-17 14:45"
+    },
+    { 
+      id: 5, 
+      email: "youssef.karim@temp-mail.org", 
+      password: "SecretPass202!", 
+      country: "الأردن", 
+      status: "active", 
+      created: "2024-01-15 10:10",
+      lastLogin: "2024-01-21 08:00"
     },
   ];
 
   const getStatusBadge = (status: string) => {
     switch (status) {
       case "active":
-        return (
-          <Badge className="bg-green-100 text-green-800">
-            <CheckCircle className="h-3 w-3 mr-1" />
-            مفعل
-          </Badge>
-        );
-      case "pending":
-        return <Badge variant="secondary">في الانتظار</Badge>;
-      case "failed":
-        return (
-          <Badge variant="destructive">
-            <XCircle className="h-3 w-3 mr-1" />
-            فشل
-          </Badge>
-        );
+        return <Badge className="bg-green-100 text-green-800">نشط</Badge>;
+      case "inactive":
+        return <Badge variant="secondary">غير نشط</Badge>;
+      case "suspended":
+        return <Badge variant="destructive">معلق</Badge>;
       default:
         return <Badge variant="outline">غير محدد</Badge>;
     }
   };
 
-  const copyToClipboard = (text: string) => {
-    navigator.clipboard.writeText(text);
-    toast({
-      title: "تم النسخ",
-      description: "تم نسخ النص إلى الحافظة",
-    });
+  const exportAccounts = () => {
+    console.log("تصدير الحسابات...");
   };
 
-  const filteredAccounts = accounts.filter(
-    (account) =>
-      account.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      account.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      account.country.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
   return (
-    <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-xl">
+    <Card className="bg-white/90 backdrop-blur-lg border-0 shadow-xl">
       <CardHeader>
         <CardTitle className="flex items-center justify-between">
-          <span>قائمة الحسابات المسجلة</span>
-          <Button className="bg-green-600 hover:bg-green-700">
+          <span className="flex items-center gap-2">
+            <Database className="h-5 w-5" />
+            الحسابات المسجلة ({accounts.length} حساب)
+          </span>
+          <Button onClick={exportAccounts} className="bg-blue-600 hover:bg-blue-700">
             <Download className="h-4 w-4 mr-2" />
             تصدير CSV
           </Button>
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="mb-6">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
-            <Input
-              placeholder="البحث في الحسابات..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10"
-            />
-          </div>
-        </div>
-
         <div className="space-y-4">
-          {filteredAccounts.map((account) => (
+          {accounts.map((account) => (
             <div
               key={account.id}
               className="p-4 border rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors"
             >
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-3">
-                  <span className="font-medium">{account.name}</span>
+                  <span className="font-medium">{account.email}</span>
                   {getStatusBadge(account.status)}
                 </div>
                 <div className="flex items-center gap-2">
                   <Button size="sm" variant="outline">
                     <Eye className="h-4 w-4" />
                   </Button>
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    onClick={() => copyToClipboard(account.email)}
-                  >
-                    <Copy className="h-4 w-4" />
+                  <Button size="sm" variant="outline">
+                    <RefreshCw className="h-4 w-4" />
+                  </Button>
+                  <Button size="sm" variant="outline">
+                    <Trash2 className="h-4 w-4" />
                   </Button>
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 text-sm text-gray-600">
                 <div>
-                  <span className="font-medium">البريد الإلكتروني:</span>
-                  <div>{account.email}</div>
+                  <span className="font-medium">كلمة المرور:</span> 
+                  <span className="font-mono ml-1">{"*".repeat(8)}</span>
                 </div>
                 <div>
-                  <span className="font-medium">الدولة:</span>
-                  <div>{account.country}</div>
+                  <span className="font-medium">الدولة:</span> {account.country}
                 </div>
                 <div>
-                  <span className="font-medium">رقم الجواز:</span>
-                  <div className="font-mono">{account.passport}</div>
+                  <span className="font-medium">تاريخ الإنشاء:</span> {account.created}
                 </div>
                 <div>
-                  <span className="font-medium">تاريخ الإنشاء:</span>
-                  <div>{account.createdAt}</div>
+                  <span className="font-medium">آخر دخول:</span> {account.lastLogin}
                 </div>
-              </div>
-
-              <div className="mt-2 text-xs text-gray-500">
-                <span className="font-medium">البروكسي المستخدم:</span> {account.proxy}
               </div>
             </div>
           ))}
         </div>
 
-        {filteredAccounts.length === 0 && (
+        {accounts.length === 0 && (
           <div className="text-center py-8 text-gray-500">
-            <Search className="h-12 w-12 mx-auto mb-3 opacity-50" />
-            <p>لم يتم العثور على حسابات مطابقة</p>
+            <Database className="h-12 w-12 mx-auto mb-3 opacity-50" />
+            <p>لم يتم تسجيل أي حسابات بعد</p>
           </div>
         )}
       </CardContent>

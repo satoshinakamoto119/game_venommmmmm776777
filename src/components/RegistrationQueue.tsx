@@ -2,8 +2,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
-import { Clock, Mail, User, MapPin, Trash2, Eye } from "lucide-react";
+import { Users, Play, Pause, Trash2, RefreshCw } from "lucide-react";
 
 interface RegistrationQueueProps {
   isRunning: boolean;
@@ -11,40 +10,22 @@ interface RegistrationQueueProps {
 
 export const RegistrationQueue = ({ isRunning }: RegistrationQueueProps) => {
   const queueItems = [
-    {
-      id: 1,
-      email: "user1@tempmail.com",
-      name: "أحمد محمد علي",
-      country: "الجزائر",
-      status: "processing",
-      progress: 65,
-      timeRemaining: "2 دقيقة",
-    },
-    {
-      id: 2,
-      email: "user2@tempmail.com", 
-      name: "فاطمة سالم",
-      country: "المغرب",
-      status: "waiting",
-      progress: 0,
-      timeRemaining: "5 دقائق",
-    },
-    {
-      id: 3,
-      email: "user3@tempmail.com",
-      name: "محمد الأحمد",
-      country: "تونس", 
-      status: "waiting",
-      progress: 0,
-      timeRemaining: "8 دقائق",
-    },
+    { id: 1, name: "أحمد علي", email: "ahmed.ali@tempmail.com", status: "pending", country: "الجزائر", time: "14:30" },
+    { id: 2, name: "فاطمة سالم", email: "fatima.salem@1secmail.org", status: "processing", country: "المغرب", time: "14:25" },
+    { id: 3, name: "محمد حسن", email: "mohamed.hassan@guerrillamail.com", status: "completed", country: "تونس", time: "14:20" },
+    { id: 4, name: "زينب أحمد", email: "zeinab.ahmed@tempmail.io", status: "failed", country: "مصر", time: "14:15" },
+    { id: 5, name: "يوسف الكريم", email: "youssef.karim@temp-mail.org", status: "pending", country: "الأردن", time: "14:10" },
   ];
 
   const getStatusBadge = (status: string) => {
     switch (status) {
+      case "completed":
+        return <Badge className="bg-green-100 text-green-800">مكتمل</Badge>;
       case "processing":
-        return <Badge className="bg-blue-100 text-blue-800">قيد المعالجة</Badge>;
-      case "waiting":
+        return <Badge className="bg-blue-100 text-blue-800">جاري المعالجة</Badge>;
+      case "failed":
+        return <Badge variant="destructive">فشل</Badge>;
+      case "pending":
         return <Badge variant="secondary">في الانتظار</Badge>;
       default:
         return <Badge variant="outline">غير محدد</Badge>;
@@ -52,11 +33,11 @@ export const RegistrationQueue = ({ isRunning }: RegistrationQueueProps) => {
   };
 
   return (
-    <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-xl">
+    <Card className="bg-white/90 backdrop-blur-lg border-0 shadow-xl">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <Clock className="h-5 w-5" />
-          قائمة انتظار التسجيل
+          <Users className="h-5 w-5" />
+          قائمة انتظار التسجيل ({queueItems.length} مستخدم)
         </CardTitle>
       </CardHeader>
       <CardContent>
@@ -66,15 +47,20 @@ export const RegistrationQueue = ({ isRunning }: RegistrationQueueProps) => {
               key={item.id}
               className="p-4 border rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors"
             >
-              <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center gap-3">
-                  <User className="h-4 w-4 text-gray-500" />
                   <span className="font-medium">{item.name}</span>
                   {getStatusBadge(item.status)}
                 </div>
                 <div className="flex items-center gap-2">
                   <Button size="sm" variant="outline">
-                    <Eye className="h-4 w-4" />
+                    <Play className="h-4 w-4" />
+                  </Button>
+                  <Button size="sm" variant="outline">
+                    <Pause className="h-4 w-4" />
+                  </Button>
+                  <Button size="sm" variant="outline">
+                    <RefreshCw className="h-4 w-4" />
                   </Button>
                   <Button size="sm" variant="outline">
                     <Trash2 className="h-4 w-4" />
@@ -82,40 +68,27 @@ export const RegistrationQueue = ({ isRunning }: RegistrationQueueProps) => {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-3">
-                <div className="flex items-center gap-2 text-sm text-gray-600">
-                  <Mail className="h-4 w-4" />
-                  {item.email}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-sm text-gray-600">
+                <div>
+                  <span className="font-medium">البريد:</span> {item.email}
                 </div>
-                <div className="flex items-center gap-2 text-sm text-gray-600">
-                  <MapPin className="h-4 w-4" />
-                  {item.country}
+                <div>
+                  <span className="font-medium">الدولة:</span> {item.country}
                 </div>
-                <div className="flex items-center gap-2 text-sm text-gray-600">
-                  <Clock className="h-4 w-4" />
-                  {item.timeRemaining}
+                <div>
+                  <span className="font-medium">الوقت:</span> {item.time}
                 </div>
               </div>
-
-              {item.status === "processing" && (
-                <div className="space-y-2">
-                  <div className="flex justify-between text-sm">
-                    <span>تقدم التسجيل</span>
-                    <span>{item.progress}%</span>
-                  </div>
-                  <Progress value={item.progress} className="h-2" />
-                </div>
-              )}
             </div>
           ))}
-
-          {queueItems.length === 0 && (
-            <div className="text-center py-8 text-gray-500">
-              <Clock className="h-12 w-12 mx-auto mb-3 opacity-50" />
-              <p>لا توجد عمليات في قائمة الانتظار</p>
-            </div>
-          )}
         </div>
+
+        {queueItems.length === 0 && (
+          <div className="text-center py-8 text-gray-500">
+            <Users className="h-12 w-12 mx-auto mb-3 opacity-50" />
+            <p>لا توجد عناصر في قائمة الانتظار</p>
+          </div>
+        )}
       </CardContent>
     </Card>
   );
