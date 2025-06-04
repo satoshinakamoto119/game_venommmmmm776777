@@ -161,7 +161,7 @@ export const ProxyManager = () => {
               <p>لم يتم إضافة أي بروكسي بعد</p>
             </div>
           )}
-        </div>
+        </CardContent>
       </Card>
     </div>
   );

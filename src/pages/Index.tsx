@@ -5,7 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Play, Pause, Square, Settings, Users, Activity, Database, Globe, Zap } from "lucide-react";
+import { Play, Pause, Square, Settings, Users, Activity, Database, Globe, Zap, Code } from "lucide-react";
+import { Link } from "react-router-dom";
 import { StatsCards } from "@/components/StatsCards";
 import { RegistrationQueue } from "@/components/RegistrationQueue";
 import { SettingsPanel } from "@/components/SettingsPanel";
@@ -64,6 +65,14 @@ const Index = () => {
             <Badge className="bg-blue-100 text-blue-800">Playwright</Badge>
             <Badge className="bg-purple-100 text-purple-800">AI Powered</Badge>
             <Badge className="bg-orange-100 text-orange-800">Anti-Detection</Badge>
+          </div>
+          <div className="mt-4">
+            <Link to="/api">
+              <Button variant="outline" className="bg-white/80 backdrop-blur-sm">
+                <Code className="h-4 w-4 mr-2" />
+                واجهة برمجة التطبيقات
+              </Button>
+            </Link>
           </div>
         </div>
 
