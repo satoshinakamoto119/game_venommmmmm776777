@@ -143,36 +143,41 @@ export const VisaCenterSelection = ({ country, selectedCenter, setSelectedCenter
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 w-full max-w-4xl mx-auto">
       <div className="text-center">
         <h2 className="text-2xl font-bold text-gray-800 mb-2">🏢 اختر مركز الفيزا</h2>
         <p className="text-gray-600">اختر مركز خدمة الفيزا في {country}</p>
       </div>
 
-      {/* Center Switching Buttons */}
-      <div className="flex flex-wrap gap-3 justify-center">
-        {centers.map((center) => (
-          <Button
-            key={center.name}
-            variant={selectedCenter === center.name ? "default" : "outline"}
-            onClick={() => handleCenterSelect(center.name)}
-            className="flex items-center gap-2"
-          >
-            <ArrowLeftRight className="h-4 w-4" />
-            {center.name}
-          </Button>
-        ))}
+      {/* Center Switching Buttons - Fixed Layout */}
+      <div className="bg-white p-6 rounded-lg border shadow-sm">
+        <h3 className="text-lg font-semibold mb-4 text-center">تبديل بين مراكز الفيزا</h3>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          {centers.map((center) => (
+            <Button
+              key={center.name}
+              variant={selectedCenter === center.name ? "default" : "outline"}
+              onClick={() => handleCenterSelect(center.name)}
+              className="flex items-center justify-center gap-2 p-4 h-auto min-h-[60px] text-center"
+              size="lg"
+            >
+              <ArrowLeftRight className="h-4 w-4 flex-shrink-0" />
+              <span className="font-medium">{center.name}</span>
+            </Button>
+          ))}
+        </div>
       </div>
 
+      {/* Center Details Cards */}
       <div className="space-y-4">
         {centers.map((center) => (
           <Card
             key={center.name}
             className={`cursor-pointer transition-all duration-200 hover:scale-102 hover:shadow-lg ${
               selectedCenter === center.name
-                ? "ring-2 ring-blue-500 bg-blue-50"
-                : "hover:bg-gray-50"
-            } ${center.color}`}
+                ? "ring-2 ring-blue-500 bg-blue-50 border-blue-300"
+                : "hover:bg-gray-50 border-gray-200"
+            }`}
             onClick={() => handleCenterSelect(center.name)}
           >
             <CardHeader>
@@ -219,6 +224,7 @@ export const VisaCenterSelection = ({ country, selectedCenter, setSelectedCenter
         ))}
       </div>
 
+      {/* Selection Confirmation and Payment Button */}
       {selectedCenter && (
         <div className="space-y-4">
           <div className="text-center">
@@ -226,6 +232,44 @@ export const VisaCenterSelection = ({ country, selectedCenter, setSelectedCenter
               ✅ تم الاختيار: {selectedCenter}
             </p>
           </div>
+          
+          {/* Payment for Booking */}
+          <Card className="bg-gradient-to-r from-blue-50 to-purple-50 border-blue-200">
+            <CardHeader>
+              <CardTitle className="text-blue-800 text-center">💳 دفع مبلغ الحجز</CardTitle>
+              <CardDescription className="text-center">
+                يتطلب دفع رسوم الحجز المسبق لتأكيد موعدك
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="text-center space-y-4">
+              <div className="flex justify-center items-center gap-4">
+                <Badge className="bg-green-600 text-white text-lg px-4 py-2">
+                  رسوم الحجز: $25
+                </Badge>
+              </div>
+              
+              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                <Button 
+                  variant="outline"
+                  className="bg-yellow-100 border-yellow-300 text-yellow-800 hover:bg-yellow-200"
+                >
+                  🟡 Binance Pay
+                </Button>
+                <Button 
+                  variant="outline"
+                  className="bg-blue-100 border-blue-300 text-blue-800 hover:bg-blue-200"
+                >
+                  💳 بطاقة ائتمان
+                </Button>
+                <Button 
+                  variant="outline"
+                  className="bg-green-100 border-green-300 text-green-800 hover:bg-green-200"
+                >
+                  🏦 تحويل بنكي
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
           
           {/* Next Button */}
           <div className="flex justify-center">
