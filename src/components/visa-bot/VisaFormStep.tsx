@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -41,21 +42,76 @@ export const VisaFormStep = ({ formData, setFormData, onNext }: VisaFormStepProp
                 <SelectValue placeholder="Choose visa type" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="schengen">Schengen Visa</SelectItem>
+                <SelectItem value="schengen-tourist">Schengen Tourist Visa</SelectItem>
+                <SelectItem value="schengen-business">Schengen Business Visa</SelectItem>
+                <SelectItem value="schengen-family">Schengen Family Visit</SelectItem>
                 <SelectItem value="student">Student Visa</SelectItem>
                 <SelectItem value="work">Work Visa</SelectItem>
-                <SelectItem value="tourist">Tourist Visa</SelectItem>
-                <SelectItem value="business">Business Visa</SelectItem>
-                <SelectItem value="family">Family Reunion</SelectItem>
+                <SelectItem value="uk-tourist">UK Tourist Visa</SelectItem>
+                <SelectItem value="uk-business">UK Business Visa</SelectItem>
+                <SelectItem value="uk-student">UK Student Visa</SelectItem>
+                <SelectItem value="uk-family">UK Family Visa</SelectItem>
+                <SelectItem value="transit">Transit Visa</SelectItem>
               </SelectContent>
             </Select>
             <div className="space-y-2">
               <Label htmlFor="destination">Destination Country</Label>
-              <Input
-                id="destination"
-                placeholder="e.g., France, Germany, Italy"
-                onChange={(e) => updateFormData('destination', e.target.value)}
-              />
+              <Select onValueChange={(value) => updateFormData('destination', value)}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Choose destination country" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="france">🇫🇷 France</SelectItem>
+                  <SelectItem value="germany">🇩🇪 Germany</SelectItem>
+                  <SelectItem value="italy">🇮🇹 Italy</SelectItem>
+                  <SelectItem value="spain">🇪🇸 Spain</SelectItem>
+                  <SelectItem value="uk">🇬🇧 United Kingdom</SelectItem>
+                  <SelectItem value="netherlands">🇳🇱 Netherlands</SelectItem>
+                  <SelectItem value="belgium">🇧🇪 Belgium</SelectItem>
+                  <SelectItem value="austria">🇦🇹 Austria</SelectItem>
+                  <SelectItem value="switzerland">🇨🇭 Switzerland</SelectItem>
+                  <SelectItem value="portugal">🇵🇹 Portugal</SelectItem>
+                  <SelectItem value="greece">🇬🇷 Greece</SelectItem>
+                  <SelectItem value="sweden">🇸🇪 Sweden</SelectItem>
+                  <SelectItem value="norway">🇳🇴 Norway</SelectItem>
+                  <SelectItem value="denmark">🇩🇰 Denmark</SelectItem>
+                  <SelectItem value="finland">🇫🇮 Finland</SelectItem>
+                  <SelectItem value="poland">🇵🇱 Poland</SelectItem>
+                  <SelectItem value="czech">🇨🇿 Czech Republic</SelectItem>
+                  <SelectItem value="hungary">🇭🇺 Hungary</SelectItem>
+                  <SelectItem value="romania">🇷🇴 Romania</SelectItem>
+                  <SelectItem value="bulgaria">🇧🇬 Bulgaria</SelectItem>
+                  <SelectItem value="croatia">🇭🇷 Croatia</SelectItem>
+                  <SelectItem value="slovenia">🇸🇮 Slovenia</SelectItem>
+                  <SelectItem value="slovakia">🇸🇰 Slovakia</SelectItem>
+                  <SelectItem value="estonia">🇪🇪 Estonia</SelectItem>
+                  <SelectItem value="latvia">🇱🇻 Latvia</SelectItem>
+                  <SelectItem value="lithuania">🇱🇹 Lithuania</SelectItem>
+                  <SelectItem value="malta">🇲🇹 Malta</SelectItem>
+                  <SelectItem value="cyprus">🇨🇾 Cyprus</SelectItem>
+                  <SelectItem value="luxembourg">🇱🇺 Luxembourg</SelectItem>
+                  <SelectItem value="iceland">🇮🇸 Iceland</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="visaPurpose">Purpose of Visit</Label>
+              <Select onValueChange={(value) => updateFormData('visaPurpose', value)}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select purpose" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="tourism">Tourism & Leisure</SelectItem>
+                  <SelectItem value="business">Business Meetings</SelectItem>
+                  <SelectItem value="family">Family Visit</SelectItem>
+                  <SelectItem value="medical">Medical Treatment</SelectItem>
+                  <SelectItem value="education">Education & Training</SelectItem>
+                  <SelectItem value="conference">Conference & Events</SelectItem>
+                  <SelectItem value="cultural">Cultural Exchange</SelectItem>
+                  <SelectItem value="sports">Sports Events</SelectItem>
+                  <SelectItem value="transit">Transit</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
           </div>
         );
@@ -93,12 +149,36 @@ export const VisaFormStep = ({ formData, setFormData, onNext }: VisaFormStepProp
               </div>
               <div className="space-y-2">
                 <Label htmlFor="nationality">Nationality</Label>
-                <Input
-                  id="nationality"
-                  placeholder="Enter nationality"
-                  onChange={(e) => updateFormData('nationality', e.target.value)}
-                />
+                <Select onValueChange={(value) => updateFormData('nationality', value)}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select nationality" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="algerian">🇩🇿 Algerian</SelectItem>
+                    <SelectItem value="tunisian">🇹🇳 Tunisian</SelectItem>
+                    <SelectItem value="moroccan">🇲🇦 Moroccan</SelectItem>
+                    <SelectItem value="egyptian">🇪🇬 Egyptian</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="email">Email Address</Label>
+              <Input
+                id="email"
+                type="email"
+                placeholder="Enter email address"
+                onChange={(e) => updateFormData('email', e.target.value)}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="phone">Phone Number</Label>
+              <Input
+                id="phone"
+                type="tel"
+                placeholder="Enter phone number"
+                onChange={(e) => updateFormData('phone', e.target.value)}
+              />
             </div>
           </div>
         );
@@ -119,11 +199,27 @@ export const VisaFormStep = ({ formData, setFormData, onNext }: VisaFormStepProp
                 />
               </div>
               <div className="space-y-2">
+                <Label htmlFor="passportIssueDate">Issue Date</Label>
+                <Input
+                  id="passportIssueDate"
+                  type="date"
+                  onChange={(e) => updateFormData('passportIssueDate', e.target.value)}
+                />
+              </div>
+              <div className="space-y-2">
                 <Label htmlFor="passportExpiry">Expiry Date</Label>
                 <Input
                   id="passportExpiry"
                   type="date"
                   onChange={(e) => updateFormData('passportExpiry', e.target.value)}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="placeOfIssue">Place of Issue</Label>
+                <Input
+                  id="placeOfIssue"
+                  placeholder="Enter place of issue"
+                  onChange={(e) => updateFormData('placeOfIssue', e.target.value)}
                 />
               </div>
             </div>
@@ -132,6 +228,7 @@ export const VisaFormStep = ({ formData, setFormData, onNext }: VisaFormStepProp
               <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
                 <Upload className="h-8 w-8 mx-auto text-gray-400 mb-2" />
                 <p className="text-sm text-gray-600">Click to upload or drag and drop</p>
+                <p className="text-xs text-gray-500">PDF, JPG, PNG (Max 5MB)</p>
                 <Input type="file" className="hidden" id="passportScan" accept=".pdf,.jpg,.png" />
               </div>
             </div>
@@ -161,13 +258,53 @@ export const VisaFormStep = ({ formData, setFormData, onNext }: VisaFormStepProp
                   onChange={(e) => updateFormData('travelDateTo', e.target.value)}
                 />
               </div>
+              <div className="space-y-2">
+                <Label htmlFor="entryPort">Port of Entry</Label>
+                <Input
+                  id="entryPort"
+                  placeholder="First city/airport of entry"
+                  onChange={(e) => updateFormData('entryPort', e.target.value)}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="accommodation">Accommodation Type</Label>
+                <Select onValueChange={(value) => updateFormData('accommodation', value)}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select accommodation" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="hotel">Hotel</SelectItem>
+                    <SelectItem value="hostel">Hostel</SelectItem>
+                    <SelectItem value="apartment">Apartment/Airbnb</SelectItem>
+                    <SelectItem value="family">Family/Friends</SelectItem>
+                    <SelectItem value="other">Other</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="purposeOfVisit">Purpose of Visit</Label>
+              <Label htmlFor="accommodationAddress">Accommodation Address</Label>
               <Textarea
-                id="purposeOfVisit"
-                placeholder="Describe the purpose of your visit..."
-                onChange={(e) => updateFormData('purposeOfVisit', e.target.value)}
+                id="accommodationAddress"
+                placeholder="Enter full address of accommodation..."
+                onChange={(e) => updateFormData('accommodationAddress', e.target.value)}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="purposeDetails">Purpose Details</Label>
+              <Textarea
+                id="purposeDetails"
+                placeholder="Provide detailed information about your visit..."
+                onChange={(e) => updateFormData('purposeDetails', e.target.value)}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="financialMeans">Financial Means (EUR per day)</Label>
+              <Input
+                id="financialMeans"
+                type="number"
+                placeholder="e.g., 50"
+                onChange={(e) => updateFormData('financialMeans', e.target.value)}
               />
             </div>
           </div>
