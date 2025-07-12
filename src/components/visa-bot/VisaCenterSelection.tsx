@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { MapPin, Star } from "lucide-react";
+import { MapPin, Star, ArrowLeftRight } from "lucide-react";
 
 interface VisaCenterSelectionProps {
   country: string;
@@ -19,27 +19,27 @@ export const VisaCenterSelection = ({ country, selectedCenter, setSelectedCenter
           {
             name: "TLScontact",
             locations: ["Tunis", "Sfax"],
-            description: "Premium visa service center - France, Spain, Netherlands",
+            description: "Premium visa service center - France, Spain, Netherlands, Germany",
             color: "bg-blue-100 border-blue-300",
-            countries: ["France", "Spain", "Netherlands"],
+            countries: ["France", "Spain", "Netherlands", "Germany"],
             processingTime: "5-15 days",
             rating: 4.2
           },
           {
             name: "VFS Global",
             locations: ["Tunis"],
-            description: "Global visa services - UK, Italy, Germany",
+            description: "Global visa services - UK, Italy, Germany, Belgium",
             color: "bg-green-100 border-green-300",
-            countries: ["UK", "Italy", "Germany"],
+            countries: ["UK", "Italy", "Germany", "Belgium"],
             processingTime: "10-20 days",
             rating: 4.0
           },
           {
             name: "BLS International",
             locations: ["Tunis"],
-            description: "Government services - Spain, Italy",
+            description: "Government services - Spain, Italy, Portugal",
             color: "bg-purple-100 border-purple-300",
-            countries: ["Spain", "Italy"],
+            countries: ["Spain", "Italy", "Portugal"],
             processingTime: "7-12 days",
             rating: 3.8
           },
@@ -49,18 +49,18 @@ export const VisaCenterSelection = ({ country, selectedCenter, setSelectedCenter
           {
             name: "TLScontact",
             locations: ["Algiers", "Oran"],
-            description: "Premium visa service center - France, Spain",
+            description: "Premium visa service center - France, Spain, Germany",
             color: "bg-blue-100 border-blue-300",
-            countries: ["France", "Spain"],
+            countries: ["France", "Spain", "Germany"],
             processingTime: "5-15 days",
             rating: 4.1
           },
           {
             name: "VFS Global",
             locations: ["Algiers"],
-            description: "Global visa services - UK, Germany, Netherlands",
+            description: "Global visa services - UK, Germany, Netherlands, Italy",
             color: "bg-green-100 border-green-300",
-            countries: ["UK", "Germany", "Netherlands"],
+            countries: ["UK", "Germany", "Netherlands", "Italy"],
             processingTime: "10-20 days",
             rating: 4.3
           },
@@ -70,27 +70,27 @@ export const VisaCenterSelection = ({ country, selectedCenter, setSelectedCenter
           {
             name: "TLScontact",
             locations: ["Casablanca", "Rabat"],
-            description: "Premium visa service center - France, Spain",
+            description: "Premium visa service center - France, Spain, Germany",
             color: "bg-blue-100 border-blue-300",
-            countries: ["France", "Spain"],
+            countries: ["France", "Spain", "Germany"],
             processingTime: "5-15 days",
             rating: 4.4
           },
           {
             name: "VFS Global",
             locations: ["Casablanca"],
-            description: "Global visa services - UK, Italy, Germany",
+            description: "Global visa services - UK, Italy, Germany, Belgium",
             color: "bg-green-100 border-green-300",
-            countries: ["UK", "Italy", "Germany"],
+            countries: ["UK", "Italy", "Germany", "Belgium"],
             processingTime: "10-20 days",
             rating: 4.1
           },
           {
             name: "BLS International",
             locations: ["Rabat"],
-            description: "Government services - Spain, Italy",
+            description: "Government services - Spain, Italy, Portugal",
             color: "bg-purple-100 border-purple-300",
-            countries: ["Spain", "Italy"],
+            countries: ["Spain", "Italy", "Portugal"],
             processingTime: "7-12 days",
             rating: 3.9
           },
@@ -100,9 +100,9 @@ export const VisaCenterSelection = ({ country, selectedCenter, setSelectedCenter
           {
             name: "VFS Global",
             locations: ["Cairo", "Alexandria"],
-            description: "Global visa services - UK, Germany, Netherlands",
+            description: "Global visa services - UK, Germany, Netherlands, France",
             color: "bg-green-100 border-green-300",
-            countries: ["UK", "Germany", "Netherlands"],
+            countries: ["UK", "Germany", "Netherlands", "France"],
             processingTime: "10-20 days",
             rating: 4.2
           },
@@ -118,9 +118,9 @@ export const VisaCenterSelection = ({ country, selectedCenter, setSelectedCenter
           {
             name: "TLScontact",
             locations: ["Cairo"],
-            description: "Premium visa service center - France, Spain",
+            description: "Premium visa service center - France, Spain, Germany",
             color: "bg-blue-100 border-blue-300",
-            countries: ["France", "Spain"],
+            countries: ["France", "Spain", "Germany"],
             processingTime: "5-15 days",
             rating: 4.3
           },
@@ -134,7 +134,12 @@ export const VisaCenterSelection = ({ country, selectedCenter, setSelectedCenter
 
   const handleCenterSelect = (centerName: string) => {
     setSelectedCenter(centerName);
-    setTimeout(onNext, 300);
+  };
+
+  const handleNext = () => {
+    if (selectedCenter) {
+      onNext();
+    }
   };
 
   return (
@@ -142,6 +147,21 @@ export const VisaCenterSelection = ({ country, selectedCenter, setSelectedCenter
       <div className="text-center">
         <h2 className="text-2xl font-bold text-gray-800 mb-2">🏢 اختر مركز الفيزا</h2>
         <p className="text-gray-600">اختر مركز خدمة الفيزا في {country}</p>
+      </div>
+
+      {/* Center Switching Buttons */}
+      <div className="flex flex-wrap gap-3 justify-center">
+        {centers.map((center) => (
+          <Button
+            key={center.name}
+            variant={selectedCenter === center.name ? "default" : "outline"}
+            onClick={() => handleCenterSelect(center.name)}
+            className="flex items-center gap-2"
+          >
+            <ArrowLeftRight className="h-4 w-4" />
+            {center.name}
+          </Button>
+        ))}
       </div>
 
       <div className="space-y-4">
@@ -200,10 +220,23 @@ export const VisaCenterSelection = ({ country, selectedCenter, setSelectedCenter
       </div>
 
       {selectedCenter && (
-        <div className="text-center">
-          <p className="text-green-600 font-medium">
-            ✅ تم الاختيار: {selectedCenter}
-          </p>
+        <div className="space-y-4">
+          <div className="text-center">
+            <p className="text-green-600 font-medium">
+              ✅ تم الاختيار: {selectedCenter}
+            </p>
+          </div>
+          
+          {/* Next Button */}
+          <div className="flex justify-center">
+            <Button 
+              onClick={handleNext}
+              size="lg"
+              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3"
+            >
+              المتابعة إلى النموذج
+            </Button>
+          </div>
         </div>
       )}
 
