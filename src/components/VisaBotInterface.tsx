@@ -22,13 +22,13 @@ export const VisaBotInterface = () => {
   const [language, setLanguage] = useState("ar");
 
   const steps = [
-    { id: 0, name: "Welcome", icon: MessageCircle },
-    { id: 1, name: "Country", icon: Globe },
-    { id: 2, name: "Visa Center", icon: MapPin },
-    { id: 3, name: "Form", icon: MessageCircle },
-    { id: 4, name: "Appointment", icon: Calendar },
-    { id: 5, name: "Payment", icon: CreditCard },
-    { id: 6, name: "Confirmation", icon: MessageCircle },
+    { id: 0, name: "مرحباً", icon: MessageCircle },
+    { id: 1, name: "الدولة", icon: Globe },
+    { id: 2, name: "المركز", icon: MapPin },
+    { id: 3, name: "النموذج", icon: MessageCircle },
+    { id: 4, name: "الموعد", icon: Calendar },
+    { id: 5, name: "الدفع", icon: CreditCard },
+    { id: 6, name: "التأكيد", icon: MessageCircle },
   ];
 
   const nextStep = () => {
@@ -56,7 +56,7 @@ export const VisaBotInterface = () => {
       case 4:
         return <AppointmentStep selectedDate={selectedDate} setSelectedDate={setSelectedDate} onNext={nextStep} />;
       case 5:
-        return <PaymentStep onNext={nextStep} />;
+        return <PaymentStep country={selectedCountry} center={selectedCenter} onNext={nextStep} />;
       case 6:
         return <ConfirmationStep country={selectedCountry} center={selectedCenter} date={selectedDate} />;
       default:
@@ -72,10 +72,10 @@ export const VisaBotInterface = () => {
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-4">
-            🤖 Visa Application Bot
+            🤖 بوت طلب الفيزا
           </h1>
           <p className="text-xl text-gray-600">
-            Your smart assistant for visa applications through TLScontact, VFS Global, BLS International, and Almaviva
+            مساعدك الذكي لتقديم طلبات الفيزا عبر TLS، VFS Global، BLS International، وAlmaviva
           </p>
         </div>
 
@@ -84,10 +84,10 @@ export const VisaBotInterface = () => {
           <CardHeader>
             <div className="flex items-center justify-between mb-4">
               <CardTitle className="flex items-center gap-2">
-                Step {currentStep + 1} of {steps.length}
+                الخطوة {currentStep + 1} من {steps.length}
               </CardTitle>
               <Badge variant="outline" className="text-sm">
-                {Math.round(progress)}% Complete
+                {Math.round(progress)}% مكتمل
               </Badge>
             </div>
             <Progress value={progress} className="h-2" />
@@ -118,12 +118,12 @@ export const VisaBotInterface = () => {
         {currentStep > 0 && currentStep < steps.length - 1 && (
           <div className="flex justify-between">
             <Button variant="outline" onClick={prevStep} className="flex items-center gap-2">
-              <ArrowLeft className="h-4 w-4" />
-              Previous
+              <ArrowRight className="h-4 w-4" />
+              السابق
             </Button>
             <Button onClick={nextStep} className="flex items-center gap-2">
-              Next
-              <ArrowRight className="h-4 w-4" />
+              التالي
+              <ArrowLeft className="h-4 w-4" />
             </Button>
           </div>
         )}
