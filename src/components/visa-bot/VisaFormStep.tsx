@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -6,7 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { FileText, Upload, User, Passport, Calendar, MapPin } from "lucide-react";
+import { FileText, Upload, User, IdCard, Calendar, MapPin } from "lucide-react";
 
 interface VisaFormStepProps {
   formData: any;
@@ -20,7 +19,7 @@ export const VisaFormStep = ({ formData, setFormData, onNext }: VisaFormStepProp
   const sections = [
     { title: "Visa Type", icon: FileText },
     { title: "Personal Info", icon: User },
-    { title: "Passport Details", icon: Passport },
+    { title: "Passport Details", icon: IdCard },
     { title: "Travel Info", icon: MapPin },
   ];
 
@@ -107,7 +106,7 @@ export const VisaFormStep = ({ formData, setFormData, onNext }: VisaFormStepProp
         return (
           <div className="space-y-4">
             <h3 className="text-lg font-semibold flex items-center gap-2">
-              <Passport className="h-5 w-5" />
+              <IdCard className="h-5 w-5" />
               Passport Details
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
