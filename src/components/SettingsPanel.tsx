@@ -6,13 +6,13 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Settings, Globe, Shield, Mail, MessageCircle, Zap } from "lucide-react";
+import { Settings, Globe, Shield, Mail, MessageCircle } from "lucide-react";
 
 export const SettingsPanel = () => {
   return (
     <div className="space-y-6">
       <Tabs defaultValue="general" className="space-y-4">
-        <TabsList className="grid w-full grid-cols-5 bg-white/90 backdrop-blur-lg">
+        <TabsList className="grid w-full grid-cols-5 bg-card/80 backdrop-blur-sm border border-border/60 p-1">
           <TabsTrigger value="general">عام</TabsTrigger>
           <TabsTrigger value="proxy">البروكسي</TabsTrigger>
           <TabsTrigger value="captcha">الكابتشا</TabsTrigger>
@@ -21,10 +21,10 @@ export const SettingsPanel = () => {
         </TabsList>
 
         <TabsContent value="general">
-          <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-xl">
+          <Card className="border-border/60 bg-card/80 backdrop-blur-sm shadow-xl">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <Settings className="h-5 w-5" />
+                <Settings className="h-5 w-5 text-primary" />
                 الإعدادات العامة
               </CardTitle>
             </CardHeader>
@@ -32,18 +32,18 @@ export const SettingsPanel = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="max-accounts">عدد الحسابات القصوى</Label>
-                  <Input id="max-accounts" type="number" defaultValue="100" />
+                  <Input id="max-accounts" type="number" defaultValue="100" className="bg-muted/30 border-border/40" />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="delay">التأخير بين المحاولات (ثانية)</Label>
-                  <Input id="delay" type="number" defaultValue="5" />
+                  <Input id="delay" type="number" defaultValue="5" className="bg-muted/30 border-border/40" />
                 </div>
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="target-country">الدولة المستهدفة</Label>
                 <Select defaultValue="algeria">
-                  <SelectTrigger>
+                  <SelectTrigger className="bg-muted/30 border-border/40">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
@@ -55,18 +55,18 @@ export const SettingsPanel = () => {
                 </Select>
               </div>
 
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between p-4 rounded-lg bg-muted/30 border border-border/40">
                 <div className="space-y-0.5">
                   <Label>تفعيل وضع التصحيح</Label>
-                  <p className="text-sm text-gray-500">عرض معلومات مفصلة في السجل</p>
+                  <p className="text-sm text-muted-foreground">عرض معلومات مفصلة في السجل</p>
                 </div>
                 <Switch />
               </div>
 
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between p-4 rounded-lg bg-muted/30 border border-border/40">
                 <div className="space-y-0.5">
                   <Label>حفظ لقطات الشاشة</Label>
-                  <p className="text-sm text-gray-500">التقاط صور عند الأخطاء</p>
+                  <p className="text-sm text-muted-foreground">التقاط صور عند الأخطاء</p>
                 </div>
                 <Switch />
               </div>
@@ -75,18 +75,18 @@ export const SettingsPanel = () => {
         </TabsContent>
 
         <TabsContent value="proxy">
-          <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-xl">
+          <Card className="border-border/60 bg-card/80 backdrop-blur-sm shadow-xl">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <Globe className="h-5 w-5" />
+                <Globe className="h-5 w-5 text-primary" />
                 إعدادات البروكسي
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-6">
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between p-4 rounded-lg bg-muted/30 border border-border/40">
                 <div className="space-y-0.5">
                   <Label>تفعيل البروكسي</Label>
-                  <p className="text-sm text-gray-500">استخدام البروكسي للاتصال</p>
+                  <p className="text-sm text-muted-foreground">استخدام البروكسي للاتصال</p>
                 </div>
                 <Switch defaultChecked />
               </div>
@@ -94,7 +94,7 @@ export const SettingsPanel = () => {
               <div className="space-y-2">
                 <Label htmlFor="proxy-rotation">فترة دوران البروكسي</Label>
                 <Select defaultValue="every-request">
-                  <SelectTrigger>
+                  <SelectTrigger className="bg-muted/30 border-border/40">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
@@ -108,13 +108,13 @@ export const SettingsPanel = () => {
 
               <div className="space-y-2">
                 <Label htmlFor="proxy-timeout">مهلة انتظار البروكسي (ثانية)</Label>
-                <Input id="proxy-timeout" type="number" defaultValue="30" />
+                <Input id="proxy-timeout" type="number" defaultValue="30" className="bg-muted/30 border-border/40" />
               </div>
 
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between p-4 rounded-lg bg-muted/30 border border-border/40">
                 <div className="space-y-0.5">
                   <Label>فحص البروكسي تلقائياً</Label>
-                  <p className="text-sm text-gray-500">اختبار البروكسيات قبل الاستخدام</p>
+                  <p className="text-sm text-muted-foreground">اختبار البروكسيات قبل الاستخدام</p>
                 </div>
                 <Switch defaultChecked />
               </div>
@@ -123,10 +123,10 @@ export const SettingsPanel = () => {
         </TabsContent>
 
         <TabsContent value="captcha">
-          <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-xl">
+          <Card className="border-border/60 bg-card/80 backdrop-blur-sm shadow-xl">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <Shield className="h-5 w-5" />
+                <Shield className="h-5 w-5 text-primary" />
                 إعدادات الكابتشا
               </CardTitle>
             </CardHeader>
@@ -134,7 +134,7 @@ export const SettingsPanel = () => {
               <div className="space-y-2">
                 <Label htmlFor="captcha-service">خدمة حل الكابتشا</Label>
                 <Select defaultValue="2captcha">
-                  <SelectTrigger>
+                  <SelectTrigger className="bg-muted/30 border-border/40">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
@@ -147,18 +147,18 @@ export const SettingsPanel = () => {
 
               <div className="space-y-2">
                 <Label htmlFor="captcha-api-key">مفتاح API</Label>
-                <Input id="captcha-api-key" type="password" placeholder="أدخل مفتاح API" />
+                <Input id="captcha-api-key" type="password" placeholder="أدخل مفتاح API" className="bg-muted/30 border-border/40" />
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="captcha-timeout">مهلة انتظار الكابتشا (ثانية)</Label>
-                <Input id="captcha-timeout" type="number" defaultValue="120" />
+                <Input id="captcha-timeout" type="number" defaultValue="120" className="bg-muted/30 border-border/40" />
               </div>
 
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between p-4 rounded-lg bg-muted/30 border border-border/40">
                 <div className="space-y-0.5">
                   <Label>إعادة المحاولة عند الفشل</Label>
-                  <p className="text-sm text-gray-500">محاولة حل الكابتشا مرة أخرى</p>
+                  <p className="text-sm text-muted-foreground">محاولة حل الكابتشا مرة أخرى</p>
                 </div>
                 <Switch defaultChecked />
               </div>
@@ -167,10 +167,10 @@ export const SettingsPanel = () => {
         </TabsContent>
 
         <TabsContent value="email">
-          <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-xl">
+          <Card className="border-border/60 bg-card/80 backdrop-blur-sm shadow-xl">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <Mail className="h-5 w-5" />
+                <Mail className="h-5 w-5 text-primary" />
                 إعدادات البريد الإلكتروني
               </CardTitle>
             </CardHeader>
@@ -178,7 +178,7 @@ export const SettingsPanel = () => {
               <div className="space-y-2">
                 <Label htmlFor="email-service">خدمة البريد المؤقت</Label>
                 <Select defaultValue="tempmail">
-                  <SelectTrigger>
+                  <SelectTrigger className="bg-muted/30 border-border/40">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
@@ -191,18 +191,18 @@ export const SettingsPanel = () => {
 
               <div className="space-y-2">
                 <Label htmlFor="email-domain">نطاق البريد المفضل</Label>
-                <Input id="email-domain" placeholder="مثال: @tempmail.com" />
+                <Input id="email-domain" placeholder="مثال: @tempmail.com" className="bg-muted/30 border-border/40" />
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="email-check-interval">فترة فحص البريد (ثانية)</Label>
-                <Input id="email-check-interval" type="number" defaultValue="30" />
+                <Input id="email-check-interval" type="number" defaultValue="30" className="bg-muted/30 border-border/40" />
               </div>
 
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between p-4 rounded-lg bg-muted/30 border border-border/40">
                 <div className="space-y-0.5">
                   <Label>تفعيل التلقائي</Label>
-                  <p className="text-sm text-gray-500">تفعيل الحسابات تلقائياً عبر البريد</p>
+                  <p className="text-sm text-muted-foreground">تفعيل الحسابات تلقائياً عبر البريد</p>
                 </div>
                 <Switch defaultChecked />
               </div>
@@ -211,43 +211,50 @@ export const SettingsPanel = () => {
         </TabsContent>
 
         <TabsContent value="notifications">
-          <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-xl">
+          <Card className="border-border/60 bg-card/80 backdrop-blur-sm shadow-xl">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <MessageCircle className="h-5 w-5" />
+                <MessageCircle className="h-5 w-5 text-primary" />
                 إعدادات الإشعارات
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="space-y-2">
                 <Label htmlFor="telegram-token">رمز بوت تلغرام</Label>
-                <Input id="telegram-token" type="password" placeholder="أدخل رمز البوت" />
+                <Input id="telegram-token" type="password" placeholder="أدخل رمز البوت" className="bg-muted/30 border-border/40" />
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="telegram-chat-id">معرف الدردشة</Label>
-                <Input id="telegram-chat-id" placeholder="أدخل معرف الدردشة" />
+                <Input id="telegram-chat-id" placeholder="أدخل معرف الدردشة" className="bg-muted/30 border-border/40" />
               </div>
 
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between p-4 rounded-lg bg-muted/30 border border-border/40">
                 <div className="space-y-0.5">
-                  <Label>إشعار عند النجاح</Label>
-                  <p className="text-sm text-gray-500">إرسال إشعار عند تسجيل حساب جديد</p>
+                  <Label>إشعارات النجاح</Label>
+                  <p className="text-sm text-muted-foreground">إرسال إشعار عند نجاح التسجيل</p>
                 </div>
                 <Switch defaultChecked />
               </div>
 
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between p-4 rounded-lg bg-muted/30 border border-border/40">
                 <div className="space-y-0.5">
-                  <Label>إشعار عند الأخطاء</Label>
-                  <p className="text-sm text-gray-500">إرسال إشعار عند حدوث خطأ</p>
+                  <Label>إشعارات الفشل</Label>
+                  <p className="text-sm text-muted-foreground">إرسال إشعار عند فشل التسجيل</p>
+                </div>
+                <Switch defaultChecked />
+              </div>
+
+              <div className="flex items-center justify-between p-4 rounded-lg bg-muted/30 border border-border/40">
+                <div className="space-y-0.5">
+                  <Label>ملخص يومي</Label>
+                  <p className="text-sm text-muted-foreground">إرسال ملخص يومي للعمليات</p>
                 </div>
                 <Switch />
               </div>
 
               <Button className="w-full">
-                <Zap className="h-4 w-4 mr-2" />
-                اختبار الإشعارات
+                حفظ الإعدادات
               </Button>
             </CardContent>
           </Card>

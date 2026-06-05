@@ -24,7 +24,7 @@ export const AutomationTools = () => {
   return (
     <div className="space-y-6">
       <Tabs defaultValue="generator" className="space-y-4">
-        <TabsList className="grid w-full grid-cols-4 bg-white/90 backdrop-blur-lg">
+        <TabsList className="grid w-full grid-cols-4 bg-card/80 backdrop-blur-sm border border-border/60 p-1">
           <TabsTrigger value="generator">مولد البيانات</TabsTrigger>
           <TabsTrigger value="scripts">السكربتات</TabsTrigger>
           <TabsTrigger value="import-export">الاستيراد/التصدير</TabsTrigger>
@@ -33,99 +33,99 @@ export const AutomationTools = () => {
 
         <TabsContent value="generator">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-xl">
+            <Card className="border-border/60 bg-card/80 backdrop-blur-sm shadow-xl">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <UserPlus className="h-5 w-5" />
+                  <UserPlus className="h-5 w-5 text-primary" />
                   مولد بيانات المستخدمين
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="name-count">عدد الأسماء المطلوبة</Label>
-                  <Input id="name-count" type="number" defaultValue="10" />
+                  <Input id="name-count" type="number" defaultValue="10" className="bg-muted/30 border-border/40" />
                 </div>
                 
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between p-3 rounded-lg bg-muted/30 border border-border/40">
                   <div className="space-y-0.5">
                     <Label>أسماء عربية</Label>
-                    <p className="text-sm text-gray-500">توليد أسماء عربية أصلية</p>
+                    <p className="text-sm text-muted-foreground">توليد أسماء عربية أصلية</p>
                   </div>
                   <Switch defaultChecked />
                 </div>
 
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between p-3 rounded-lg bg-muted/30 border border-border/40">
                   <div className="space-y-0.5">
                     <Label>تضمين الألقاب</Label>
-                    <p className="text-sm text-gray-500">إضافة ألقاب مع الأسماء</p>
+                    <p className="text-sm text-muted-foreground">إضافة ألقاب مع الأسماء</p>
                   </div>
                   <Switch />
                 </div>
 
                 <Button className="w-full">
-                  <Shuffle className="h-4 w-4 mr-2" />
+                  <Shuffle className="h-4 w-4 ml-2" />
                   توليد الأسماء
                 </Button>
               </CardContent>
             </Card>
 
-            <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-xl">
+            <Card className="border-border/60 bg-card/80 backdrop-blur-sm shadow-xl">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Mail className="h-5 w-5" />
+                  <Mail className="h-5 w-5 text-primary" />
                   مولد رسائل البريد
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="email-count">عدد رسائل البريد</Label>
-                  <Input id="email-count" type="number" defaultValue="10" />
+                  <Input id="email-count" type="number" defaultValue="10" className="bg-muted/30 border-border/40" />
                 </div>
                 
                 <div className="space-y-2">
                   <Label htmlFor="email-domain">النطاق المطلوب</Label>
-                  <Input id="email-domain" placeholder="@tempmail.com" />
+                  <Input id="email-domain" placeholder="@tempmail.com" className="bg-muted/30 border-border/40" />
                 </div>
 
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between p-3 rounded-lg bg-muted/30 border border-border/40">
                   <div className="space-y-0.5">
                     <Label>أرقام عشوائية</Label>
-                    <p className="text-sm text-gray-500">إضافة أرقام للبريد</p>
+                    <p className="text-sm text-muted-foreground">إضافة أرقام للبريد</p>
                   </div>
                   <Switch defaultChecked />
                 </div>
 
                 <Button className="w-full">
-                  <Mail className="h-4 w-4 mr-2" />
+                  <Mail className="h-4 w-4 ml-2" />
                   توليد رسائل البريد
                 </Button>
               </CardContent>
             </Card>
           </div>
 
-          <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-xl">
+          <Card className="border-border/60 bg-card/80 backdrop-blur-sm shadow-xl">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <Database className="h-5 w-5" />
+                <Database className="h-5 w-5 text-primary" />
                 البيانات المولدة مؤخراً
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="space-y-3">
+              <div className="space-y-2">
                 {[
                   { type: "name", data: "أحمد محمد العلي", time: "منذ دقيقتين" },
                   { type: "email", data: "fatima.salem.2024@tempmail.com", time: "منذ 5 دقائق" },
                   { type: "name", data: "زينب حسن المحمودي", time: "منذ 8 دقائق" },
                   { type: "email", data: "mohamed.karim.dz@1secmail.org", time: "منذ 12 دقيقة" },
                 ].map((item, index) => (
-                  <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                  <div key={index} className="flex items-center justify-between p-3 rounded-lg bg-muted/30 border border-border/40">
                     <div className="flex items-center gap-3">
                       <Badge variant={item.type === "name" ? "default" : "secondary"}>
                         {item.type === "name" ? "اسم" : "بريد"}
                       </Badge>
-                      <span className="font-mono">{item.data}</span>
+                      <span className="font-mono text-sm text-foreground">{item.data}</span>
                     </div>
-                    <span className="text-sm text-gray-500">{item.time}</span>
+                    <span className="text-sm text-muted-foreground">{item.time}</span>
                   </div>
                 ))}
               </div>
@@ -135,15 +135,15 @@ export const AutomationTools = () => {
 
         <TabsContent value="scripts">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-xl">
+            <Card className="border-border/60 bg-card/80 backdrop-blur-sm shadow-xl">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Code className="h-5 w-5" />
+                  <Code className="h-5 w-5 text-primary" />
                   سكربت Python الأساسي
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="bg-gray-900 text-green-400 p-4 rounded-lg font-mono text-sm overflow-x-auto">
+                <div className="bg-slate-900 text-green-400 p-4 rounded-lg font-mono text-sm overflow-x-auto border border-slate-700">
                   <div># BLS Auto Registration Script</div>
                   <div>from playwright.sync_api import sync_playwright</div>
                   <div>import random, time</div>
@@ -153,16 +153,16 @@ export const AutomationTools = () => {
                   <div>&nbsp;&nbsp;&nbsp;&nbsp;pass</div>
                 </div>
                 <Button className="w-full">
-                  <Download className="h-4 w-4 mr-2" />
+                  <Download className="h-4 w-4 ml-2" />
                   تحميل السكربت الكامل
                 </Button>
               </CardContent>
             </Card>
 
-            <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-xl">
+            <Card className="border-border/60 bg-card/80 backdrop-blur-sm shadow-xl">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <FileText className="h-5 w-5" />
+                  <FileText className="h-5 w-5 text-primary" />
                   ملف الإعدادات
                 </CardTitle>
               </CardHeader>
@@ -170,6 +170,7 @@ export const AutomationTools = () => {
                 <Textarea 
                   placeholder="أدخل إعدادات السكربت هنا..."
                   rows={8}
+                  className="bg-muted/30 border-border/40 font-mono text-sm"
                   defaultValue={`# إعدادات السكربت
 target_country: "algeria"
 max_accounts: 100
@@ -179,7 +180,7 @@ captcha_service: "2captcha"
 email_service: "tempmail"`}
                 />
                 <Button className="w-full">
-                  <Upload className="h-4 w-4 mr-2" />
+                  <Upload className="h-4 w-4 ml-2" />
                   حفظ الإعدادات
                 </Button>
               </CardContent>
@@ -189,61 +190,59 @@ email_service: "tempmail"`}
 
         <TabsContent value="import-export">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-xl">
+            <Card className="border-border/60 bg-card/80 backdrop-blur-sm shadow-xl">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Upload className="h-5 w-5" />
+                  <Upload className="h-5 w-5 text-primary" />
                   استيراد البيانات
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="import-file">ملف البيانات</Label>
-                  <Input id="import-file" type="file" accept=".csv,.txt,.json" />
+                  <Input id="import-file" type="file" accept=".csv,.txt,.json" className="bg-muted/30 border-border/40" />
                 </div>
                 
                 <div className="space-y-2">
                   <Label>نوع البيانات</Label>
                   <div className="flex gap-2">
-                    <Badge variant="outline" className="cursor-pointer">حسابات</Badge>
-                    <Badge variant="outline" className="cursor-pointer">بروكسيات</Badge>
-                    <Badge variant="outline" className="cursor-pointer">أسماء</Badge>
+                    <Badge variant="outline" className="cursor-pointer hover:bg-primary/10">حسابات</Badge>
+                    <Badge variant="outline" className="cursor-pointer hover:bg-primary/10">بروكسيات</Badge>
+                    <Badge variant="outline" className="cursor-pointer hover:bg-primary/10">أسماء</Badge>
                   </div>
                 </div>
 
                 <Button className="w-full">
-                  <Upload className="h-4 w-4 mr-2" />
+                  <Upload className="h-4 w-4 ml-2" />
                   استيراد البيانات
                 </Button>
               </CardContent>
             </Card>
 
-            <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-xl">
+            <Card className="border-border/60 bg-card/80 backdrop-blur-sm shadow-xl">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Download className="h-5 w-5" />
+                  <Download className="h-5 w-5 text-primary" />
                   تصدير البيانات
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="space-y-3">
-                  <Button className="w-full justify-start">
-                    <Download className="h-4 w-4 mr-2" />
-                    تصدير جميع الحسابات (CSV)
-                  </Button>
-                  <Button className="w-full justify-start" variant="outline">
-                    <Download className="h-4 w-4 mr-2" />
-                    تصدير البروكسيات (TXT)
-                  </Button>
-                  <Button className="w-full justify-start" variant="outline">
-                    <Download className="h-4 w-4 mr-2" />
-                    تصدير السجلات (JSON)
-                  </Button>
-                  <Button className="w-full justify-start" variant="outline">
-                    <Download className="h-4 w-4 mr-2" />
-                    تصدير التقرير الكامل (PDF)
-                  </Button>
-                </div>
+              <CardContent className="space-y-3">
+                <Button className="w-full justify-start" variant="outline">
+                  <Download className="h-4 w-4 ml-2" />
+                  تصدير جميع الحسابات (CSV)
+                </Button>
+                <Button className="w-full justify-start" variant="outline">
+                  <Download className="h-4 w-4 ml-2" />
+                  تصدير البروكسيات (TXT)
+                </Button>
+                <Button className="w-full justify-start" variant="outline">
+                  <Download className="h-4 w-4 ml-2" />
+                  تصدير الأسماء المولدة (JSON)
+                </Button>
+                <Button className="w-full justify-start" variant="outline">
+                  <Download className="h-4 w-4 ml-2" />
+                  تصدير السجلات (LOG)
+                </Button>
               </CardContent>
             </Card>
           </div>
@@ -251,60 +250,80 @@ email_service: "tempmail"`}
 
         <TabsContent value="ai-tools">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-xl">
+            <Card className="border-border/60 bg-card/80 backdrop-blur-sm shadow-xl">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Brain className="h-5 w-5" />
-                  محلل الأخطاء الذكي
+                  <Brain className="h-5 w-5 text-primary" />
+                  حل الكابتشا بالذكاء الاصطناعي
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="error-log">رسالة الخطأ</Label>
-                  <Textarea 
-                    id="error-log"
-                    placeholder="الصق رسالة الخطأ هنا..."
-                    rows={4}
-                  />
+                <div className="flex items-center justify-between p-3 rounded-lg bg-muted/30 border border-border/40">
+                  <div className="space-y-0.5">
+                    <Label>تفعيل AI Solver</Label>
+                    <p className="text-sm text-muted-foreground">استخدام الذكاء الاصطناعي لحل الكابتشا</p>
+                  </div>
+                  <Switch defaultChecked />
                 </div>
-                
-                <Button className="w-full">
-                  <Brain className="h-4 w-4 mr-2" />
-                  تحليل الخطأ بالذكاء الاصطناعي
-                </Button>
 
-                <div className="bg-blue-50 p-3 rounded-lg text-sm">
-                  <strong>آخر تحليل:</strong> مشكلة في اتصال البروكسي - يُنصح بتغيير الخادم
+                <div className="flex items-center justify-between p-3 rounded-lg bg-muted/30 border border-border/40">
+                  <div className="space-y-0.5">
+                    <Label>التعرف على النصوص</Label>
+                    <p className="text-sm text-muted-foreground">OCR لحل الكابتشا النصية</p>
+                  </div>
+                  <Switch defaultChecked />
+                </div>
+
+                <div className="p-4 rounded-lg bg-green-500/5 border border-green-500/20">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Zap className="h-4 w-4 text-green-400" />
+                    <span className="font-medium text-green-400">إحصائيات AI</span>
+                  </div>
+                  <div className="grid grid-cols-2 gap-2 text-sm text-muted-foreground">
+                    <div>معدل النجاح: <span className="text-green-400 font-medium">94.2%</span></div>
+                    <div>الكابتشا المحلولة: <span className="text-foreground font-medium">2,847</span></div>
+                    <div>متوسط الوقت: <span className="text-foreground font-medium">3.2 ثانية</span></div>
+                    <div>التوفير: <span className="text-green-400 font-medium">$142.35</span></div>
+                  </div>
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-xl">
+            <Card className="border-border/60 bg-card/80 backdrop-blur-sm shadow-xl">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Zap className="h-5 w-5" />
-                  مُحسن الأداء الذكي
+                  <Zap className="h-5 w-5 text-primary" />
+                  أدوات متقدمة
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <span>تحسين التوقيتات</span>
-                    <Badge className="bg-green-100 text-green-800">نشط</Badge>
+                <div className="flex items-center justify-between p-3 rounded-lg bg-muted/30 border border-border/40">
+                  <div className="space-y-0.5">
+                    <Label>مكافحة الكشف</Label>
+                    <p className="text-sm text-muted-foreground">تقنيات متقدمة لتجاوز الحماية</p>
                   </div>
-                  <div className="flex items-center justify-between">
-                    <span>اختيار البروكسي الأمثل</span>
-                    <Badge className="bg-blue-100 text-blue-800">تلقائي</Badge>
+                  <Switch defaultChecked />
+                </div>
+
+                <div className="flex items-center justify-between p-3 rounded-lg bg-muted/30 border border-border/40">
+                  <div className="space-y-0.5">
+                    <Label>محاكاة السلوك البشري</Label>
+                    <p className="text-sm text-muted-foreground">حركات فأرة وتأخيرات عشوائية</p>
                   </div>
-                  <div className="flex items-center justify-between">
-                    <span>تجنب ساعات الذروة</span>
-                    <Badge variant="secondary">معطل</Badge>
+                  <Switch defaultChecked />
+                </div>
+
+                <div className="flex items-center justify-between p-3 rounded-lg bg-muted/30 border border-border/40">
+                  <div className="space-y-0.5">
+                    <Label>تبديل البصمة</Label>
+                    <p className="text-sm text-muted-foreground">تغيير بصمة المتصفح تلقائياً</p>
                   </div>
+                  <Switch defaultChecked />
                 </div>
 
                 <Button className="w-full">
-                  <Zap className="h-4 w-4 mr-2" />
-                  تحسين الإعدادات تلقائياً
+                  <Zap className="h-4 w-4 ml-2" />
+                  تطبيق جميع الإعدادات
                 </Button>
               </CardContent>
             </Card>

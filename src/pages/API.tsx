@@ -6,7 +6,8 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Copy, Play, Eye, Settings, Globe, Database } from "lucide-react";
+import { Copy, Play, Eye, Settings, Globe, ArrowRight, Bot } from "lucide-react";
+import { Link } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 
 const API = () => {
@@ -137,23 +138,34 @@ curl -X GET "${endpoint}/accounts?limit=10" \\
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 p-6">
-      <div className="max-w-7xl mx-auto space-y-6">
-        {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-4">
-            🔌 واجهة برمجة التطبيقات
-          </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            تحكم في نظام BLS التلقائي عبر REST API مع دعم متعدد اللغات
-          </p>
+    <div className="min-h-screen bg-background">
+      {/* Top Navigation Bar */}
+      <header className="sticky top-0 z-50 border-b border-border/60 bg-card/80 backdrop-blur-xl">
+        <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-3">
+          <div className="flex items-center gap-3">
+            <div className="h-9 w-9 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+              <Bot className="h-5 w-5 text-white" />
+            </div>
+            <div>
+              <h1 className="text-lg font-bold text-foreground">واجهة برمجة التطبيقات</h1>
+              <p className="text-xs text-muted-foreground">REST API لنظام BLS التلقائي</p>
+            </div>
+          </div>
+          <Link to="/">
+            <Button variant="outline" size="sm" className="gap-1.5">
+              <ArrowRight className="h-3.5 w-3.5" />
+              العودة للرئيسية
+            </Button>
+          </Link>
         </div>
+      </header>
 
+      <main className="max-w-7xl mx-auto p-6 space-y-6">
         {/* API Configuration */}
-        <Card className="bg-white/90 backdrop-blur-lg border-0 shadow-xl">
+        <Card className="border-border/60 bg-card/80 backdrop-blur-sm shadow-xl">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <Settings className="h-5 w-5" />
+              <Settings className="h-5 w-5 text-primary" />
               إعدادات API
             </CardTitle>
             <CardDescription>
@@ -163,27 +175,27 @@ curl -X GET "${endpoint}/accounts?limit=10" \\
           <CardContent className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <label className="text-sm font-medium">مفتاح API</label>
+                <label className="text-sm font-medium text-foreground">مفتاح API</label>
                 <div className="flex gap-2">
                   <Input
                     value={apiKey}
                     onChange={(e) => setApiKey(e.target.value)}
-                    className="font-mono"
+                    className="font-mono bg-muted/30 border-border/40"
                   />
-                  <Button onClick={() => copyToClipboard(apiKey)} variant="outline">
+                  <Button onClick={() => copyToClipboard(apiKey)} variant="outline" className="border-border/60">
                     <Copy className="h-4 w-4" />
                   </Button>
                 </div>
               </div>
               <div className="space-y-2">
-                <label className="text-sm font-medium">نقطة النهاية الأساسية</label>
+                <label className="text-sm font-medium text-foreground">نقطة النهاية الأساسية</label>
                 <div className="flex gap-2">
                   <Input
                     value={endpoint}
                     onChange={(e) => setEndpoint(e.target.value)}
-                    className="font-mono"
+                    className="font-mono bg-muted/30 border-border/40"
                   />
-                  <Button onClick={() => copyToClipboard(endpoint)} variant="outline">
+                  <Button onClick={() => copyToClipboard(endpoint)} variant="outline" className="border-border/60">
                     <Copy className="h-4 w-4" />
                   </Button>
                 </div>
@@ -194,49 +206,49 @@ curl -X GET "${endpoint}/accounts?limit=10" \\
 
         {/* API Documentation */}
         <Tabs defaultValue="endpoints" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-4 bg-white/90 backdrop-blur-lg shadow-lg h-12">
-            <TabsTrigger value="endpoints" className="flex items-center gap-2">
+          <TabsList className="grid w-full grid-cols-4 bg-card/80 backdrop-blur-sm border border-border/60 h-12 p-1">
+            <TabsTrigger value="endpoints" className="gap-2">
               <Globe className="h-4 w-4" />
               نقاط النهاية
             </TabsTrigger>
-            <TabsTrigger value="python" className="flex items-center gap-2">
-              🐍 Python
+            <TabsTrigger value="python" className="gap-2">
+              Python
             </TabsTrigger>
-            <TabsTrigger value="javascript" className="flex items-center gap-2">
-              ⚡ JavaScript
+            <TabsTrigger value="javascript" className="gap-2">
+              JavaScript
             </TabsTrigger>
-            <TabsTrigger value="curl" className="flex items-center gap-2">
-              🔧 cURL
+            <TabsTrigger value="curl" className="gap-2">
+              cURL
             </TabsTrigger>
           </TabsList>
 
           <TabsContent value="endpoints">
-            <Card className="bg-white/90 backdrop-blur-lg border-0 shadow-xl">
+            <Card className="border-border/60 bg-card/80 backdrop-blur-sm shadow-xl">
               <CardHeader>
                 <CardTitle>نقاط النهاية المتاحة</CardTitle>
                 <CardDescription>جميع API endpoints المدعومة في النظام</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="space-y-4">
-                  {endpoints.map((endpoint, index) => (
-                    <div key={index} className="border rounded-lg p-4 bg-gray-50">
+                <div className="space-y-3">
+                  {endpoints.map((ep, index) => (
+                    <div key={index} className="border border-border/40 rounded-lg p-4 bg-muted/30 hover:bg-muted/50 transition-colors">
                       <div className="flex items-center justify-between mb-2">
                         <div className="flex items-center gap-3">
-                          <Badge variant={endpoint.method === "GET" ? "default" : "secondary"}>
-                            {endpoint.method}
+                          <Badge variant={ep.method === "GET" ? "default" : "secondary"}>
+                            {ep.method}
                           </Badge>
-                          <code className="font-mono text-sm">{endpoint.path}</code>
+                          <code className="font-mono text-sm text-foreground">{ep.path}</code>
                         </div>
-                        <Button size="sm" variant="outline">
+                        <Button size="sm" variant="ghost" className="h-8 w-8 p-0">
                           <Eye className="h-4 w-4" />
                         </Button>
                       </div>
-                      <p className="text-gray-600 mb-2">{endpoint.description}</p>
-                      {endpoint.params.length > 0 && (
+                      <p className="text-muted-foreground mb-2">{ep.description}</p>
+                      {ep.params.length > 0 && (
                         <div className="text-sm">
-                          <span className="font-medium">المعاملات:</span>
-                          <span className="ml-2 text-gray-500">
-                            {endpoint.params.join(", ")}
+                          <span className="font-medium text-foreground/70">المعاملات:</span>
+                          <span className="mr-2 text-muted-foreground">
+                            {ep.params.join(", ")}
                           </span>
                         </div>
                       )}
@@ -248,18 +260,18 @@ curl -X GET "${endpoint}/accounts?limit=10" \\
           </TabsContent>
 
           <TabsContent value="python">
-            <Card className="bg-white/90 backdrop-blur-lg border-0 shadow-xl">
+            <Card className="border-border/60 bg-card/80 backdrop-blur-sm shadow-xl">
               <CardHeader>
                 <CardTitle className="flex items-center justify-between">
-                  🐍 مثال Python
-                  <Button onClick={() => copyToClipboard(codeExamples.python)} variant="outline">
-                    <Copy className="h-4 w-4 mr-2" />
+                  مثال Python
+                  <Button onClick={() => copyToClipboard(codeExamples.python)} variant="outline" className="border-border/60">
+                    <Copy className="h-4 w-4 ml-2" />
                     نسخ الكود
                   </Button>
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <pre className="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm">
+                <pre className="bg-slate-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm border border-slate-700">
                   <code>{codeExamples.python}</code>
                 </pre>
               </CardContent>
@@ -267,18 +279,18 @@ curl -X GET "${endpoint}/accounts?limit=10" \\
           </TabsContent>
 
           <TabsContent value="javascript">
-            <Card className="bg-white/90 backdrop-blur-lg border-0 shadow-xl">
+            <Card className="border-border/60 bg-card/80 backdrop-blur-sm shadow-xl">
               <CardHeader>
                 <CardTitle className="flex items-center justify-between">
-                  ⚡ مثال JavaScript
-                  <Button onClick={() => copyToClipboard(codeExamples.javascript)} variant="outline">
-                    <Copy className="h-4 w-4 mr-2" />
+                  مثال JavaScript
+                  <Button onClick={() => copyToClipboard(codeExamples.javascript)} variant="outline" className="border-border/60">
+                    <Copy className="h-4 w-4 ml-2" />
                     نسخ الكود
                   </Button>
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <pre className="bg-gray-900 text-yellow-400 p-4 rounded-lg overflow-x-auto text-sm">
+                <pre className="bg-slate-900 text-yellow-400 p-4 rounded-lg overflow-x-auto text-sm border border-slate-700">
                   <code>{codeExamples.javascript}</code>
                 </pre>
               </CardContent>
@@ -286,18 +298,18 @@ curl -X GET "${endpoint}/accounts?limit=10" \\
           </TabsContent>
 
           <TabsContent value="curl">
-            <Card className="bg-white/90 backdrop-blur-lg border-0 shadow-xl">
+            <Card className="border-border/60 bg-card/80 backdrop-blur-sm shadow-xl">
               <CardHeader>
                 <CardTitle className="flex items-center justify-between">
-                  🔧 مثال cURL
-                  <Button onClick={() => copyToClipboard(codeExamples.curl)} variant="outline">
-                    <Copy className="h-4 w-4 mr-2" />
+                  مثال cURL
+                  <Button onClick={() => copyToClipboard(codeExamples.curl)} variant="outline" className="border-border/60">
+                    <Copy className="h-4 w-4 ml-2" />
                     نسخ الكود
                   </Button>
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <pre className="bg-gray-900 text-blue-400 p-4 rounded-lg overflow-x-auto text-sm">
+                <pre className="bg-slate-900 text-blue-400 p-4 rounded-lg overflow-x-auto text-sm border border-slate-700">
                   <code>{codeExamples.curl}</code>
                 </pre>
               </CardContent>
@@ -306,10 +318,10 @@ curl -X GET "${endpoint}/accounts?limit=10" \\
         </Tabs>
 
         {/* API Testing */}
-        <Card className="bg-white/90 backdrop-blur-lg border-0 shadow-xl">
+        <Card className="border-border/60 bg-card/80 backdrop-blur-sm shadow-xl">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <Play className="h-5 w-5" />
+              <Play className="h-5 w-5 text-primary" />
               اختبار API
             </CardTitle>
             <CardDescription>
@@ -319,30 +331,30 @@ curl -X GET "${endpoint}/accounts?limit=10" \\
           <CardContent className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <label className="text-sm font-medium">طلب JSON</label>
+                <label className="text-sm font-medium text-foreground">طلب JSON</label>
                 <Textarea
                   placeholder='{"country": "DZ", "email_count": 5}'
                   rows={4}
-                  className="font-mono text-sm"
+                  className="font-mono text-sm bg-muted/30 border-border/40"
                 />
               </div>
               <div className="space-y-2">
-                <label className="text-sm font-medium">الاستجابة</label>
+                <label className="text-sm font-medium text-foreground">الاستجابة</label>
                 <Textarea
                   value='{"id": "reg_123", "status": "started", "message": "تم بدء التسجيل بنجاح"}'
                   readOnly
                   rows={4}
-                  className="font-mono text-sm bg-gray-50"
+                  className="font-mono text-sm bg-muted/30 border-border/40"
                 />
               </div>
             </div>
             <Button className="w-full">
-              <Play className="h-4 w-4 mr-2" />
+              <Play className="h-4 w-4 ml-2" />
               إرسال الطلب
             </Button>
           </CardContent>
         </Card>
-      </div>
+      </main>
     </div>
   );
 };
