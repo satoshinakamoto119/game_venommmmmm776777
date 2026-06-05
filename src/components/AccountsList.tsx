@@ -56,7 +56,7 @@ export const AccountsList = () => {
   const getStatusBadge = (status: string) => {
     switch (status) {
       case "active":
-        return <Badge className="bg-green-100 text-green-800">نشط</Badge>;
+        return <Badge className="bg-green-500/10 text-green-400 border border-green-500/20">نشط</Badge>;
       case "inactive":
         return <Badge variant="secondary">غير نشط</Badge>;
       case "suspended":
@@ -71,57 +71,57 @@ export const AccountsList = () => {
   };
 
   return (
-    <Card className="bg-white/90 backdrop-blur-lg border-0 shadow-xl">
+    <Card className="border-border/60 bg-card/80 backdrop-blur-sm shadow-xl">
       <CardHeader>
         <CardTitle className="flex items-center justify-between">
           <span className="flex items-center gap-2">
-            <Database className="h-5 w-5" />
+            <Database className="h-5 w-5 text-primary" />
             الحسابات المسجلة ({accounts.length} حساب)
           </span>
-          <Button onClick={exportAccounts} className="bg-blue-600 hover:bg-blue-700">
-            <Download className="h-4 w-4 mr-2" />
+          <Button onClick={exportAccounts} className="bg-gradient-to-l from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white shadow-lg shadow-blue-600/20">
+            <Download className="h-4 w-4 ml-2" />
             تصدير CSV
           </Button>
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="space-y-4">
+        <div className="space-y-3">
           {accounts.map((account) => (
             <div
               key={account.id}
-              className="p-4 border rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors"
+              className="p-4 rounded-lg border border-border/40 bg-muted/30 hover:bg-muted/50 transition-colors"
             >
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-3">
-                  <span className="font-medium">{account.email}</span>
+                  <span className="font-medium text-foreground">{account.email}</span>
                   {getStatusBadge(account.status)}
                 </div>
-                <div className="flex items-center gap-2">
-                  <Button size="sm" variant="outline">
-                    <Eye className="h-4 w-4" />
+                <div className="flex items-center gap-1.5">
+                  <Button size="sm" variant="ghost" className="h-8 w-8 p-0">
+                    <Eye className="h-3.5 w-3.5" />
                   </Button>
-                  <Button size="sm" variant="outline">
-                    <RefreshCw className="h-4 w-4" />
+                  <Button size="sm" variant="ghost" className="h-8 w-8 p-0">
+                    <RefreshCw className="h-3.5 w-3.5" />
                   </Button>
-                  <Button size="sm" variant="outline">
-                    <Trash2 className="h-4 w-4" />
+                  <Button size="sm" variant="ghost" className="h-8 w-8 p-0 text-destructive hover:text-destructive">
+                    <Trash2 className="h-3.5 w-3.5" />
                   </Button>
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 text-sm text-gray-600">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 text-sm text-muted-foreground">
                 <div>
-                  <span className="font-medium">كلمة المرور:</span> 
-                  <span className="font-mono ml-1">{"*".repeat(8)}</span>
+                  <span className="font-medium text-foreground/70">كلمة المرور:</span> 
+                  <span className="font-mono mr-1">{"*".repeat(8)}</span>
                 </div>
                 <div>
-                  <span className="font-medium">الدولة:</span> {account.country}
+                  <span className="font-medium text-foreground/70">الدولة:</span> {account.country}
                 </div>
                 <div>
-                  <span className="font-medium">تاريخ الإنشاء:</span> {account.created}
+                  <span className="font-medium text-foreground/70">تاريخ الإنشاء:</span> {account.created}
                 </div>
                 <div>
-                  <span className="font-medium">آخر دخول:</span> {account.lastLogin}
+                  <span className="font-medium text-foreground/70">آخر دخول:</span> {account.lastLogin}
                 </div>
               </div>
             </div>
@@ -129,8 +129,8 @@ export const AccountsList = () => {
         </div>
 
         {accounts.length === 0 && (
-          <div className="text-center py-8 text-gray-500">
-            <Database className="h-12 w-12 mx-auto mb-3 opacity-50" />
+          <div className="text-center py-8 text-muted-foreground">
+            <Database className="h-12 w-12 mx-auto mb-3 opacity-30" />
             <p>لم يتم تسجيل أي حسابات بعد</p>
           </div>
         )}

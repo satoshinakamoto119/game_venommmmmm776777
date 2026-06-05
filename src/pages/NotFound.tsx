@@ -1,40 +1,42 @@
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Home, ArrowLeft } from "lucide-react";
+import { Home, ArrowLeft, Bot } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const NotFound = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center p-6">
-      <Card className="max-w-md w-full bg-white/90 backdrop-blur-lg border-0 shadow-2xl">
+    <div className="min-h-screen bg-background flex items-center justify-center p-6">
+      <Card className="max-w-md w-full border-border/60 bg-card/80 backdrop-blur-sm shadow-2xl">
         <CardHeader className="text-center">
-          <div className="text-6xl mb-4">🤖</div>
-          <CardTitle className="text-2xl font-bold text-gray-800">Page Not Found</CardTitle>
-          <CardDescription className="text-gray-600">
-            The page you're looking for doesn't exist or has been moved.
+          <div className="mx-auto h-16 w-16 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center mb-4">
+            <Bot className="h-8 w-8 text-white" />
+          </div>
+          <CardTitle className="text-2xl font-bold text-foreground">الصفحة غير موجودة</CardTitle>
+          <CardDescription>
+            الصفحة التي تبحث عنها غير موجودة أو تم نقلها.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="text-center">
-            <p className="text-lg font-bold text-gray-700 mb-2">404</p>
-            <p className="text-gray-600 mb-6">
-              Don't worry! You can go back to the main application or start using our visa bot.
+            <p className="text-5xl font-bold text-primary mb-2">404</p>
+            <p className="text-muted-foreground mb-6">
+              لا تقلق! يمكنك العودة إلى التطبيق الرئيسي.
             </p>
           </div>
           
           <div className="space-y-3">
             <Link to="/" className="block">
-              <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
-                <Home className="h-4 w-4 mr-2" />
-                Go to Main App
+              <Button className="w-full bg-gradient-to-l from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-lg">
+                <Home className="h-4 w-4 ml-2" />
+                الصفحة الرئيسية
               </Button>
             </Link>
             
-            <Link to="/visa-bot" className="block">
-              <Button variant="outline" className="w-full">
-                <ArrowLeft className="h-4 w-4 mr-2" />
-                Try Visa Bot
+            <Link to="/api" className="block">
+              <Button variant="outline" className="w-full border-border/60">
+                <ArrowLeft className="h-4 w-4 ml-2" />
+                واجهة برمجة التطبيقات
               </Button>
             </Link>
           </div>
